@@ -361,18 +361,20 @@ export class ApiPollingUpdateService implements UpdateService {
 
   private async fetchExpertQueueUpdates(): Promise<ExpertQueue[]> {
     const token = this.tokenManager.getToken();
-    if (!this.state.userId || !token || this.state.userRole !== 'expert') {
-      console.warn(
-        'ApiPollingUpdateService: Expert queue polling requires expert role'
-      );
-      return [];
-    }
+    // console.log(this.state)
+    // if (!this.state.userId || !token || this.state.userRole !== 'expert') {
+    //   console.warn(
+    //     'ApiPollingUpdateService: Expert queue polling requires expert role'
+    //   );
+    //   return [];
+    // }
 
     try {
-      const sinceParam = this.state.lastExpertQueueUpdate
-        ? `?since=${this.state.lastExpertQueueUpdate}&expertId=${this.state.userId}`
-        : `?expertId=${this.state.userId}`;
+      // const sinceParam = this.state.lastExpertQueueUpdate
+      //   ? `?since=${this.state.lastExpertQueueUpdate}&expertId=${this.state.userId}`
+      //   : `?expertId=${this.state.userId}`;
 
+      const sinceParam = `?expertId=${this.state.userId}`
       const url = `${this.config.baseUrl}/api/expert-queue/updates${sinceParam}`;
 
       const response = await fetch(url, {
